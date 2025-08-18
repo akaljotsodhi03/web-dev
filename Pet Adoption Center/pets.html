@@ -23,9 +23,7 @@
 ];
 
 function displayPet(pet) {
-
     let cssClass = pet.adopted ? "pet adopted" : "pet available";
-
     let html = `
         <div class="${cssClass}">
             <h2>${pet.name}</h2>
@@ -34,10 +32,8 @@ function displayPet(pet) {
             <p>Status: ${pet.adopted ? "Adopted" : "Available for adoption"}</p>
         </div>
     `;
-
     return html;
 }
-
 function showAllPets() {
     let container = document.getElementById("pet-list");
     let html = "";
@@ -46,7 +42,6 @@ function showAllPets() {
     }
     container.innerHTML = html;
 }
-
 function adoptPet(petName) {
     for (let pet of pets) {
         if (pet.name === petName) {
@@ -54,9 +49,10 @@ function adoptPet(petName) {
             break; 
         }
     }
+    showAllPets();
 }
 showAllPets();
-adoptPet("Coco"); 
+adoptPet("Garfield"); 
     </script>
 </body>
 </html>
