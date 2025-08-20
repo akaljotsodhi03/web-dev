@@ -24,7 +24,15 @@
     { name: "Garfield", type: "cat", age: 3, adopted: false },
     { name: "Buddy", type: "dog", age: 5, adopted: true },
     { name: "Nibbles", type: "hamster", age: 1, adopted: false },
-    { name: "Coco", type: "parrot", age: 2, adopted: true }
+    { name: "Coco", type: "parrot", age: 2, adopted: true },
+    { name: "Whiskers", type: "cat", age: 4, adopted: true },
+    { name: "Rex", type: "dog", age: 2, adopted: false },
+    { name: "Peanut", type: "hamster", age: 1, adopted: true },
+    { name: "Kiwi", type: "parrot", age: 3, adopted: false },
+    { name: "Luna", type: "cat", age: 2, adopted: false },
+    { name: "Max", type: "dog", age: 6, adopted: true },
+    { name: "Poppy", type: "hamster", age: 1, adopted: false },
+    { name: "Sunny", type: "parrot", age: 5, adopted: true }
 ];
 
 function displayPet(pet) {
@@ -61,9 +69,7 @@ showAllPets();
 function findPet() {
     const name = document.getElementById("search-pet").value.trim();
     const resultContainer = document.getElementById("search-result");
-
     const pet = pets.find(p => p.name.toLowerCase() === name.toLowerCase());
-
     if (pet) {
         resultContainer.innerHTML = displayPet(pet);
     } else {
