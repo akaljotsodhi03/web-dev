@@ -13,7 +13,12 @@
     <h1>Happy Paws Adoption Center</h1>
     <div id="pet-list"></div>
     <div class="${cssClass}"></div>
-    
+
+    <h2>Find Pet</h2>
+    <input type="text" id="search-pet" placeholder="Enter pet name">
+    <button id="find-pet-btn">Search</button>
+    <div id="search-result"></div>
+
     <script>
         let pets = [
     { name: "Garfield", type: "cat", age: 3, adopted: false },
@@ -52,7 +57,21 @@ function adoptPet(petName) {
     showAllPets();
 }
 showAllPets();
-adoptPet("Garfield"); 
+
+function findPet() {
+    const name = document.getElementById("search-pet").value.trim();
+    const resultContainer = document.getElementById("search-result");
+
+    const pet = pets.find(p => p.name.toLowerCase() === name.toLowerCase());
+
+    if (pet) {
+        resultContainer.innerHTML = displayPet(pet);
+    } else {
+        resultContainer.innerHTML = `<p>No pet found with the name "${name}".</p>`;
+    }
+}
+document.getElementById("find-pet-btn").addEventListener("click", findPet);
+showAllPets();
     </script>
 </body>
 </html>
