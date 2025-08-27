@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>My Awesome Quiz</h1>
+
+    <form id="quiz-form">
+      <div class="question">
+        <p>1. What is the capital of France?</p>
+        <input type="radio" name="q1" value="paris" id="paris" />
+        <label for="paris">Paris</label><br />
+        <input type="radio" name="q1" value="london" id="london" />
+        <label for="london">London</label><br />
+        <input type="radio" name="q1" value="rome" id="rome" />
+        <label for="rome">Rome</label>
+      </div>
+
+      <div class="question">
+        <p>2. Which of the following are programming languages?</p>
+        <input type="checkbox" name="q2" value="python" id="python" />
+        <label for="python">Python</label><br />
+        <input type="checkbox" name="q2" value="html" id="html" />
+        <label for="html">HTML</label><br />
+        <input type="checkbox" name="q2" value="css" id="css" />
+        <label for="css">CSS</label><br />
+        <input type="checkbox" name="q2" value="java" id="java" />
+        <label for="java">Java</label>
+      </div>
+
+      <div class="question">
+        <p>3. What planet do we live on?</p>
+        <label for="q3">Your answer:</label>
+        <input type="text" name="q3" id="q3" />
+      </div>
+
+      <button type="submit" id="submit-btn">Check Answers</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
