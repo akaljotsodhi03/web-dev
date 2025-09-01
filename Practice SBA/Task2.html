@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template 2</title>
+</head>
+<body>
+    <div class="cards-container">
+        <!-- Your cards will be added here using JavaScript -->
+    </div>
+
+    <script>
+        // Fetch data from this API
+        const apiUrl = "https://pokeapi.co/api/v2/pokemon-species/aegislash";
+        
+        // Your JavaScript here
+        // 1. Fetch the data
+        // 2. Create a dropdown with album IDs as options
+        // 3. Add event listener to filter cards when selection changes
+        // 4. Display filtered cards
+        
+        let pokemonData = null;
+        
+        async function fetchPokemon() {
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const pokemon = await response.json();
+                return pokemon;
+            } catch (error) {
+                console.error('Error fetching Pokemon:', error);
+                const container = document.querySelector('.cards-container');
+                container.innerHTML = `
+                    <div class="error-message">
+                        <h2>Oops! Something went wrong</h2>
+                        <p>Unable to load Pokemon data. Please try again later.</p>
+                        <p class="error-details">Error: ${error.message}</p>
+                    </div>
+                `;
+                return null;
+            }
+        }
+        
+        function createPokemonCard(pokemon) {
+            const container = document.querySelector('.cards-container');
+            
+            // Get English flavor text
+            const englishFlavorText = pokemon.flavor_text_entries.find(entry => 
+                entry.language.name === 'en'
+            );
+            
+            // Get English name
+            const englishName = pokemon.names.find(name => 
+                name.language.name === 'en'
+            );
+            
+            // Get English genus
+            const englishGenus = pokemon.genera.find(genus => 
+                genus.language.name === 'en'
+            );
+            
+            container.innerHTML = `
+                <div class="pokemon-card">
+                    <div class="card-image">
+                        <div class="pokemon-placeholder">
+                            <h2>${englishName ? englishName.name : pokemon.name}</h2>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="pokemon-name">${englishName ? englishName.name : pokemon.name}</h3>
+                        <p class="pokemon-genus">${englishGenus ? englishGenus.genus : 'Pokemon'}</p>
+                        <div class="pokemon-details">
+                            <p><span class="label">ID:</span> ${pokemon.id}</p>
+                            <p><span class="label">Base Happiness:</span> ${pokemon.base_happiness}</p>
+                            <p><span class="label">Capture Rate:</span> ${pokemon.capture_rate}</p>
+                            <p><span class="label">Color:</span> ${pokemon.color.name}</p>
+                            <p><span class="label">Generation:</span> ${pokemon.generation.name.replace('generation-', '').toUpperCase()}</p>
+                        </div>
+                        <div class="pokemon-description">
+                            <p>${englishFlavorText ? englishFlavorText.flavor_text.replace(/\f/g, ' ') : 'No description available'}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function initializeApp() {
+            const pokemon = await fetchPokemon();
+            
+            if (!pokemon) return; // Exit if fetch failed
+            
+            pokemonData = pokemon;
+            createPokemonCard(pokemon);
+        }
+        
+        // Initialize the app
+        initializeApp();
+        
+    </script>
+
+    <style>
+                /* Your CSS here
+           Requirements:
+           - Cards should be the same size
+           - Use CSS Grid for a 3-column layout
+           - Responsive design: cards should stack on mobile
+        */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .user-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensures all cards are same height */
+        }
+        
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .user-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            word-break: break-word;
+        }
+        
+        .user-id {
+            color: #888;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-top: auto;
+        }
+        
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .error-message h2 {
+            color: #e74c3c;
+            margin-bottom: 16px;
+        }
+        
+        .error-message p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .error-details {
+            font-size: 0.9em;
+            color: #999;
+            font-style: italic;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            body {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .card-image {
+                height: 180px;
+            }
+            
+            .card-content {
+                padding: 15px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .cards-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template 1</title>
+</head>
+<body>
+    <div class="card" id="book-card">
+        <!-- Do not hardcode the content here, use JavaScript -->
+    </div>
+
+    <script>
+        const book = {
+            "id": 42,
+            "title": "The Hitchhiker's Guide to the Galaxy",
+            "author": "Douglas Adams",
+            "year": 1979,
+            "genres": ["Science Fiction", "Comedy", "Adventure"],
+            "pages": 224,
+            "language": "English",
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81XSN3hA5gL.jpg"
+        }
+
+               // Your JavaScript here - populate the card with book data
+               const bookCard = document.getElementById('book-card');
+        
+        // Create the book card HTML structure
+        bookCard.innerHTML = `
+            <div class="book-image">
+                <img src="${book.imageUrl}" alt="${book.title}" />
+            </div>
+            <div class="book-info">
+                <h1 class="book-title">${book.title}</h1>
+                <h2 class="book-author">${book.author}</h2>
+                <div class="book-details">
+                    <p><span class="label">YEAR:</span> ${book.year}</p>
+                    <p><span class="label">PAGES:</span> ${book.pages}</p>
+                    <p><span class="label">LANGUAGE:</span> ${book.language}</p>
+                    <p><span class="label">GENRES:</span> ${book.genres.join(', ')}</p>
+                </div>
+            </div>
+        `;
+        
+    </script>
+
+    <style>
+               /* Your CSS here
+           Requirements:
+           - Card width of 300px with a border
+           - Text color #333
+           - Title 1.5 times as big as base font
+           - Headings should be uppercase
+           - Use flexbox for layout
+        */
+        
+        .card {
+            width: 300px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .book-image {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .book-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .book-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .book-title {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .book-author {
+            font-size: 1.1em;
+            color: #333;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+        
+        .book-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .book-details p {
+            margin: 0;
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        .label {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</body>
+</html>
