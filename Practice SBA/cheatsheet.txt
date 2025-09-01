@@ -13,16 +13,26 @@ array.push(item); array.map(callback); array.filter(callback); array.join(", ");
 const html = `<div class="card"><h1>${title}</h1></div>`;
 
 ### Functions
-function name(param) { return param * 2; }
-const arrow = (param) => param * 2;
+function name(param) { return param * 2; } // Function declaration
+const arrow = (param) => param * 2; // Arrow function
+const arrowBlock = (param) => { return param * 2; }; // Arrow with block
 async function fetchData() { const response = await fetch(url); return response.json(); }
+function withDefaults(name = "Guest", age = 18) { return `${name} is ${age}`; } // Default parameters
+function restParams(...args) { return args.length; } // Rest parameters
+const method = { getName() { return "John"; } }; // Object method
+function* generator() { yield 1; yield 2; } // Generator function
 
 ### DOM Manipulation
 document.getElementById("id"); document.querySelector(".class");
 element.innerHTML = "content"; element.addEventListener("click", handler);
 
 ### Event Listeners
+element.addEventListener("click", function(event) { console.log("Clicked!"); });
 element.addEventListener("change", (e) => console.log(e.target.value));
+element.addEventListener("submit", (e) => { e.preventDefault(); /* prevent form submit */ });
+element.addEventListener("keydown", (e) => { if(e.key === "Enter") { /* handle enter */ } });
+element.removeEventListener("click", handlerFunction); // Remove listener
+// Common events: click, change, submit, keydown, keyup, focus, blur, mouseover, mouseout
 
 ## ASYNC/AWAIT & API FETCHING
 ### Modern Fetch Pattern
