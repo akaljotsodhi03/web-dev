@@ -1,10 +1,15 @@
+<script>
+    let {data} = $props();
+</script>
+
 <h2>My blog contents page</h2>
 
 <nav>
-    <a href="/blog/bananas">bananas</a>
-    <a href="/blog/web">web</a>
-    <a href="/blog/cool">Cool</a>
-    <a href="/blog/ideas">ideas</a>
+
+    {#each data.posts as posts}
+        <a href="/blog/{posts.title}">{posts.title}</a>
+    {/each}
+
 </nav>
 
 <style>
