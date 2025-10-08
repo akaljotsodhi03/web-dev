@@ -9,13 +9,14 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-
+<header>
 <h1>My Cool Website!!</h1>
 <Navigation/>
+</header>
 {@render children?.()}
 
 <style>
-	body{
+	:global(body){
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	}
 </style>
